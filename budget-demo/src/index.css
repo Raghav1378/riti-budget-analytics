@@ -1,0 +1,92 @@
+:root {
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #1A2233;
+  background: #F6F7FA;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  max-width: 100%;
+}
+
+.app-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.app-content {
+  width: 100%;
+}
+
+.responsive-grid {
+  min-width: 0;
+}
+
+.responsive-grid > * {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .responsive-grid--three,
+  .responsive-grid--two {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .app-content {
+    padding: 20px 14px 36px !important;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .responsive-grid--three {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell [style*="max-width: 1200px"] {
+    padding-inline: 14px !important;
+  }
+
+  .app-shell [style*="max-width: 1200px"] > div:first-child {
+    align-items: flex-start !important;
+  }
+
+  .app-shell [style*="font-size: 26px"] {
+    font-size: 22px !important;
+  }
+
+  .app-shell [style*="gridTemplateColumns"] {
+    min-width: 0;
+  }
+}
