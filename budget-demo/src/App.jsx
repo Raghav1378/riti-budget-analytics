@@ -60,10 +60,12 @@ function buildDataSummary(ds, scopeDeptId) {
     (ds.schemesByDept[d.id] || []).forEach((s) => {
       const schemeRows = ds.sanctioned.filter((r) => r.scheme === s.id);
       const hist = schemeRows.map((r) => `${r.year}: Rs ${r.sanctioned} Cr`).join(", ");
+      const utilRows = ds.actual.filter((a) => a.scheme === s.id && a.utilization !== null);
+      const utilHist = utilRows.length ? `; utilization: ${utilRows.map((a) => `${a.year}: ${a.utilization}%`).join(", ")}` : "";
       const notes = schemeRows.map((r) => r.notes).filter(Boolean).join(" | ");
       const unitCost = ds.unitCosts[s.id];
       const unitFacts = unitCost ? `; unit rate: Rs ${(unitCost.material + unitCost.labor + unitCost.material * unitCost.contingencyPct / 100).toFixed(2)} lakh per ${unitCost.unitLabel} (material Rs ${unitCost.material}L, labour Rs ${unitCost.labor}L, contingency ${unitCost.contingencyPct}%)` : "";
-      lines.push(`  - ${s.name} (${s.category}): ${hist || "no data"}${unitFacts}${notes ? `; uploaded notes: ${notes}` : ""}`);
+      lines.push(`  - ${s.name} (${s.category}): ${hist || "no data"}${utilHist}${unitFacts}${notes ? `; uploaded notes: ${notes}` : ""}`);
     });
   });
   return lines.join("\n");
